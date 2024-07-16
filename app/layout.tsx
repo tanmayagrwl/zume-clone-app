@@ -8,6 +8,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { shadesOfPurple } from "@clerk/themes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +22,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{
+      baseTheme: [shadesOfPurple],
+      variables: {
+        colorPrimary: "#0E78F9",
+        colorText: "white",
+        colorBackground: "#1C1F2E",
+        colorInputBackground: "#252A41",
+        colorInputText: "white"
+      },
+      layout: {
+        logoImageUrl: "/logo.svg",
+        logoPlacement: "inside"
+      }
+    }}>
       <html lang="en">
         <body className={inter.className}>
             {children}
