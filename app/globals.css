@@ -52,3 +52,16 @@ html, body {
 .item-container.active{
   background-color: #0E78F9;
 }
+
+.main-page {
+  width: 100%;
+}
+
+.navbar-container{
+  height: 72px;
+  display: flex;
+  align-items: center;
+  background-color: #1C1F2E;
+  flex-direction: row-reverse;
+  padding-right: 100px;
+}

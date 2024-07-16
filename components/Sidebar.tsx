@@ -17,9 +17,9 @@ function Sidebar() {
         <p>ZUUM</p>
         </div> 
         <div className="items">
-            {sideBarItems.map(item => {
-                return <div className={["item-container",pathName == item.link ? "active" : null].join(" ")}>
-                  <Link key={item.name} href={item.link}>
+            {sideBarItems.map((item, index) => {
+                return <div key={index} className={["item-container",pathName == item.link ? "active" : null].join(" ")}>
+                  <Link href={item.link}>
                     <div className="item">
                       <Image src={item.image} width={24} height={24}/> 
                       <p> {item.name} </p>

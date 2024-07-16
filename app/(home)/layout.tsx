@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import SideBar from "@/components/Sidebar"
+import Navbar from "@/components/Navbar"
 // import classes from "./layout.module.css"
 export default function HomeLayout({children}: { 
     children: ReactNode
@@ -8,7 +9,7 @@ export default function HomeLayout({children}: {
     <div className="home-container">
         <SideBar/>
         <div className="main-page">
-            Navbar
+            <Navbar/>
             {children}
         </div>
     </div>
