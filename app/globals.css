@@ -72,3 +72,62 @@ html, body {
   align-items: center;
   height: 100%;
 }
+
+.cards-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card {
+  flex: 1;
+  width: 100%;
+  height: inherit;
+  border-radius: 14px;
+}
+
+.card.upcoming-container{
+  transform:  scaleX(-1);
+  background-size: cover;
+  background-position:bottom
+}
+
+.meeting-actions {
+  gap: 13px
+}
+
+
+.meeting-actions .card{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  justify-content: space-between;  
+}
+
+.meeting-actions .card .action-header {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 33.6px;
+}
+
+.meeting-actions .card .action-desc {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.meeting-actions .new {
+  background-color: #FF742E;
+}
+
+.meeting-actions .join {
+  background-color: #0E78F9;
+}
+
+.meeting-actions .schedule {
+  background-color: #830EF9;
+}
+
+.meeting-actions .view-recordings {
+  background-color: #F9A90E;
+}
