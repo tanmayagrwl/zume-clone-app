@@ -10,6 +10,3 @@ function CardsContainer({children, height, className, width}: {children: ReactNo
 
 export default CardsContainer
 
-export function Card ({children, backgroundImage, className, width}: {children: ReactNode, backgroundImage: string}) {
-    return <div className={["card", className || null].join(" ")} style={{"backgroundImage": backgroundImage ? `url(/${backgroundImage})` : null, minWidth: width || null}}>{children}</div>
-}

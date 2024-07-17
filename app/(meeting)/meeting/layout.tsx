@@ -1,8 +1,9 @@
 import React from 'react'
+import StreamVideoProvider from '@/providers/StreamClientProvider'
 
-function layout() {
+function layout({children}) {
   return (
-    <div></div>
+    <div><StreamVideoProvider>{children}</StreamVideoProvider></div>
   )
 }
 

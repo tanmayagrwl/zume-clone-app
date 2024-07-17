@@ -10,10 +10,10 @@ import Button from './Button'
 function Sidebar() {
 
   return (
-    <div className="container">
+    <div className="sidebar-container">
         <div className="header">
         <Image src="/logo.svg" width={40} height={40} alt="sidebar logo"/>  
-        <p>ZUUM</p>
+        <p>ZOOM</p>
         </div> 
         <div className="items">
             {sideBarItems.map((item, index) => {

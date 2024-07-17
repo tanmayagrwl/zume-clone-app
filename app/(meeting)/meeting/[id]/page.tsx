@@ -1,71 +1,49 @@
-"use client"
+'use client';
 
-import React, { useEffect, useState } from 'react'
-import {
-    CallControls,
-    SpeakerLayout,
-    StreamCall,
-    StreamTheme,
-    StreamVideo,
-    User,
-  } from '@stream-io/video-react-sdk';
-  import { useAuth } from "@clerk/nextjs";
+import { useState } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
+import { useParams } from 'next/navigation';
+import {Loader} from 'lucide-react';
 
-  
-  
-  export const MyApp = ({params}) => {
-   
-    const apiKey = process.env.STREAM_API_KEY;
-    const { userId, getToken } = useAuth();
-    const [client, setClient] = useState(null);
-    const [call, setCall] = useState(null);
-    const user: User = { id: userId };
+import { useGetCallById } from '@/hooks/useGetCallById';
+import Alert from '@/components/Alert';
+import MeetingSetup from '@/components/MeetingSetup';
+import MeetingRoom from '@/components/MeetingRoom';
 
-    useEffect(() => {
-        const getUserToken = async () => {
-            return await getToken()
-        }   
+const MeetingPage = () => {
+  const { id } = useParams();
+  const { isLoaded, user } = useUser();
+  const { call, isCallLoading } = useGetCallById(id);
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
 
-        if(userId) {
-            const token = getUserToken()
-            setClient(new StreamVideoClient({ apiKey, user, token }));    
-        }    
-    }, [userId])
+  if (!isLoaded || isCallLoading) return <Loader />;
 
+  if (!call) return (
+    <p className="text-center text-3xl font-bold text-white">
+      Call Not Found
+    </p>
+  );
 
-    useEffect(() => {
-       if(client) {
-        setCall(client.call('default', params.id))
-       }    
-    }, [client])
+  // get more info about custom call type:  https://getstream.io/video/docs/react/guides/configuring-call-types/
+  const notAllowed = call.type === 'invited' && (!user || !call.state.members.find((m) => m.user.id === user.id));
 
-    useEffect(() => {
-        const joinOrCreate = async () => {
-            await call.getOrCreate();
-        }
-        
-        if(call) {
-            joinOrCreate()
-        }    
-     }, [call])
+  if (notAllowed) return <Alert title="You are not allowed to join this meeting" />;
 
-    return (<>
-      {client && <StreamVideo client={client}>
-            {call && <StreamCall call={call}>
-                <StreamTheme>
-                    <SpeakerLayout />
-                    <CallControls />
-                </StreamTheme>
-            </StreamCall>}
-        </StreamVideo>}
-    </>
-    );
-  };
-
-function Page() {
   return (
-    <div>Page</div>
-  )
-}
+    <main className="h-screen w-full">
+      <StreamCall call={call}>
+        <StreamTheme>
 
-export default Page
+        {!isSetupComplete ? (
+          <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
+        ) : (
+          <MeetingRoom />
+        )}
+        </StreamTheme>
+      </StreamCall>
+    </main>
+  );
+};
+
+export default MeetingPage;

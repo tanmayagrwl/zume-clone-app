@@ -8,6 +8,7 @@ import {
     UserButton
   } from '@clerk/nextjs'
 import Button from './Button'
+
 function Navbar() {
   return (
     <div className='navbar-container'>
