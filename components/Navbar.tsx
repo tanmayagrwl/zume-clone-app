@@ -7,6 +7,7 @@ import {
     SignedOut,
     UserButton
   } from '@clerk/nextjs'
+import Button from './Button'
 function Navbar() {
   return (
     <div className='navbar-container'>
@@ -14,7 +15,7 @@ function Navbar() {
             <SignOutButton/>
         </SignedIn>
         <SignedOut>
-            <SignInButton/>
+            <Button item={{name: "Login", link:"/sign-in", image: ""}}/>
         </SignedOut>
     </div>
   )

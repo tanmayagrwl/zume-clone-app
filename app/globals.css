@@ -44,7 +44,7 @@ html, body {
   align-items: center;
 }
 
-.container .item {
+.container .button {
   display: flex;
   gap: 20px;
   padding: 20px 16px;
@@ -57,11 +57,17 @@ html, body {
   font-size: 18px;
 }
 
-.item-container{
+.items{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button-container{
   border-radius: 10px;
 }
 
-.item-container.active{
+.button-container.active{
   background-color: #0E78F9;
 }
 
