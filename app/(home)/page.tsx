@@ -1,7 +1,16 @@
 import CardsContainer, { Card } from "@/components/Cards";
 import Image from "next/image"
+import {
+    ClerkProvider,
+    SignInButton,
+    SignedIn,
+    SignedOut,
+    UserButton
+  } from '@clerk/nextjs'
+import Link from "next/link";
+
 export default function HomePage () {
-    return (<>
+    return (<div className="home-outer">
         <CardsContainer height="303px">
             <Card backgroundImage="home-background.png" className="upcoming-container">
             </Card>
@@ -24,5 +33,11 @@ export default function HomePage () {
             <div><span className="action-header">View Recordings</span> <br/> <span className="action-desc"> Meeting recordings </span></div>
             </Card>
         </CardsContainer>
-    </>)
+        <SignedIn>
+            <div className="overview">
+                <h2>Today’s Upcoming Meetings</h2>
+                <span><Link href="/upcoming"> See all </Link></span>
+            </div>
+        </SignedIn>
+    </div>)
 }
