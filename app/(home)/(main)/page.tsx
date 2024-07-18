@@ -39,9 +39,8 @@ export default function HomePage () {
           const id = crypto.randomUUID();
           const call = client.call('default', id);
           if (!call) throw new Error('Failed to create meeting');
-          console.log("now", new Date(Date.now()).toISOString())
-          console.log("expected", dateTime?.toISOString())
-          const startsAt = dateTime?.toISOString() || new Date(Date.now()).toISOString();
+          
+          const startsAt = dateTime ? dateTime?.toISOString() : new Date(Date.now()).toISOString();
           const description = desc || 'Instant Meeting';
           await call.getOrCreate({
             data: {

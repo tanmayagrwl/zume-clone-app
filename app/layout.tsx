@@ -10,6 +10,8 @@ import {
 } from '@clerk/nextjs'
 import { shadesOfPurple } from "@clerk/themes";
 import "react-datepicker/dist/react-datepicker.css";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -226,7 +226,7 @@ html, body {
   align-items: center;
 }
 
-.previous-container, .upcoming-container
+.previous-container, .upcoming-container, .recording-container
 {
   padding: 40px;
 }
