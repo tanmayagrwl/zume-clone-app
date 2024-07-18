@@ -16,6 +16,7 @@ import { useUser } from '@clerk/nextjs';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
+import { useGetCalls } from '@/hooks/useGetCalls';
 
 
 export default function HomePage () {
@@ -24,9 +25,14 @@ export default function HomePage () {
     const { user } = useUser();
     const [callDetail, setCallDetail] = useState(null)
     const router = useRouter()
+    const { upcomingCalls } = useGetCalls()
+
+
+
+    console.log("upcomingCalls", upcomingCalls)
 
     const createMeeting = async () => {
-        if (!client || !user) return;
+        if (!client) return;
         try {
           const id = crypto.randomUUID();
           const call = client.call('default', id);
@@ -42,7 +48,6 @@ export default function HomePage () {
             },
           });
         setCallDetail(call);
-        console.log("calledddd  11111")
         router.push(`/meeting/${call.id}`);
         } catch (error) {
           console.error(error);
@@ -82,6 +87,12 @@ export default function HomePage () {
                 <h2>Today’s Upcoming Meetings</h2>
                 <span><Link href="/upcoming"> See all </Link></span>
             </div>
+            {<CardsContainer height="260px" className="upcoming-meetings-container">
+              <Card width="260px" className="upcoming-meetings-card">
+                <Image alt="view-recordings" src="/upcoming.svg" height="56" width="56"/>
+                <div><span className="action-header">View Recordings</span> <br/> <span className="action-desc"> Meeting recordings </span></div>
+              </Card>
+            </CardsContainer>}               
         </SignedIn>
     </div>)
 }

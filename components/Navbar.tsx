@@ -17,17 +17,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 function Navbar() {
   const { user } = useUser();
-  console.log(user)
   return (
     <div className='navbar-container'>
         <SignedIn>
           <SignOutButton>
             <ButtonUI className='ml-8 bg-blue-500 hover:bg-blue-600'> <LogOut className='mr-4'/> Logout </ButtonUI>
           </SignOutButton>
-          <Avatar>
+          {user && <Avatar>
             <AvatarImage src={user?.imageUrl} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+            <AvatarFallback>{user?.firstName[0] + user?.lastName[0]}</AvatarFallback>
+          </Avatar>}
         </SignedIn>
         <SignedOut>
           <SignInButton>
