@@ -15,6 +15,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader";
 
 
 export default function HomePage () {
@@ -25,6 +26,9 @@ export default function HomePage () {
     const router = useRouter()
 
     const createMeeting = async () => {
+        console.log("calledddd")
+        console.log(client)
+        console.log(user)
         if (!client || !user) return;
         try {
           const id = crypto.randomUUID();
@@ -40,12 +44,16 @@ export default function HomePage () {
               },
             },
           });
-          setCallDetail(call);
-            router.push(`/meeting/${call.id}`);
+        setCallDetail(call);
+        console.log("calledddd  11111")
+        router.push(`/meeting/${call.id}`);
         } catch (error) {
           console.error(error);
         }
       };
+
+    if(!client)
+        return <Loader/>
     
 
     return (<div className="home-outer">
