@@ -9,6 +9,8 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import { shadesOfPurple } from "@clerk/themes";
+import "react-datepicker/dist/react-datepicker.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

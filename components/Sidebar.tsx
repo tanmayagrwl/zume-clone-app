@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { sideBarItems } from '../constants/SideBarItems'
+import { sideBarItems } from '../constants'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'

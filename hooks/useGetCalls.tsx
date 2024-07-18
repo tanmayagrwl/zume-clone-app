@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 
-export const useGetCalls = () => {
+export const useGetCalls = (value) => {
   const { user } = useUser();
   const client = useStreamVideoClient();
   const [calls, setCalls] = useState<Call[]>();
@@ -36,7 +36,7 @@ export const useGetCalls = () => {
     };
 
     loadCalls();
-  }, [client, user?.id]);
+  }, [client, user?.id, value]);
 
   const now = new Date();
 

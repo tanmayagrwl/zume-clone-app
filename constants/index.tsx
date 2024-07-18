@@ -32,3 +32,8 @@ export const sideBarItems: Item[] = [
         image: "/personal-room.svg"
     }
 ] 
+
+export const avatarImages = [
+    '/images/avatar-1.jpeg',
+
+  ];
