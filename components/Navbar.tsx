@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import {
     ClerkProvider,
@@ -7,16 +9,30 @@ import {
     SignedOut,
     UserButton
   } from '@clerk/nextjs'
-import Button from './Button'
+import { LogOut, LogIn } from 'lucide-react'
+import { Button as ButtonUI } from './ui/button'
+import { useUser } from '@clerk/nextjs';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 
 function Navbar() {
+  const { user } = useUser();
+  console.log(user)
   return (
     <div className='navbar-container'>
         <SignedIn>
-            <SignOutButton/>
+          <SignOutButton>
+            <ButtonUI className='ml-8 bg-blue-500 hover:bg-blue-600'> <LogOut className='mr-4'/> Logout </ButtonUI>
+          </SignOutButton>
+          <Avatar>
+            <AvatarImage src={user?.imageUrl} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </SignedIn>
         <SignedOut>
-            <Button item={{name: "Login", link:"/sign-in", image: ""}}/>
+          <SignInButton>
+            <ButtonUI className='bg-blue-500 hover:bg-blue-600'> <LogIn className='mr-4'/> Login </ButtonUI>
+          </SignInButton>
         </SignedOut>
     </div>
   )

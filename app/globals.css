@@ -151,7 +151,7 @@ html, body {
   align-items: center;
   background-color: #1C1F2E;
   flex-direction: row-reverse;
-  padding-right: 100px;
+  padding-right: 40px;
 }
 
 .auth-container {

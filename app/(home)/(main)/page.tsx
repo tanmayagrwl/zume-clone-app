@@ -26,9 +26,6 @@ export default function HomePage () {
     const router = useRouter()
 
     const createMeeting = async () => {
-        console.log("calledddd")
-        console.log(client)
-        console.log(user)
         if (!client || !user) return;
         try {
           const id = crypto.randomUUID();
@@ -52,9 +49,10 @@ export default function HomePage () {
         }
       };
 
-    if(!client)
+    if(!client){
+        debugger
         return <Loader/>
-    
+    }
 
     return (<div className="home-outer">
         <CardsContainer height="303px">
