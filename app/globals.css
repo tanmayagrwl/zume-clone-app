@@ -246,6 +246,14 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 303px;
+  padding: 40px;
+  justify-content: space-between;
+}
+
+.upcoming-container-superimpose .next-meeting {
+  padding: 5px;
+  background-color: rgba(255, 255, 255, .1);
+  font-size: 16px;
 }
 
 

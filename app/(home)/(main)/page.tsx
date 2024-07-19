@@ -20,6 +20,7 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingModal from "@/components/MeetingModal";
 import ReactDatePicker from 'react-datepicker';
 import CallList from "@/components/CallList";
+import Moment from "moment";
 
 export default function HomePage () {
 
@@ -64,18 +65,25 @@ export default function HomePage () {
         return <Loader/>
     }
 
-    console.log("today", todayCalls)
-
     return (<div className="home-outer">
         <CardsContainer height="303px">
             <Card backgroundImage="home-background.png" className="upcoming-container">
               
             </Card>
             <div className="upcoming-container-superimpose">
-                {todayCalls?.length>0 && <SignedIn>
-                  Upcoming Meeting at {todayCalls?.[0].state.startsAt?.getTime()}
-                </SignedIn>}
-              </div>
+                <div>{todayCalls?.length>0 && <SignedIn>
+                  <div className="next-meeting">Upcoming Meeting at: {Moment(todayCalls?.[0].state.startsAt).format("hh:mm a")}</div>
+                </SignedIn>}</div>
+                <div>
+                  <div>
+                    <span className="text-[72px] font-bold">{Moment(todayCalls?.[0].state.startsAt).format("hh:mm")}</span>
+                    <span className="text-[24px] ml-1">{Moment(todayCalls?.[0].state.startsAt).format("a").toUpperCase()}</span>
+                  </div>
+                  <div>
+                    <span className="text-[24px]">{Moment(todayCalls?.[0].state.startsAt).format("dddd, D MMM YYYY")}</span>
+                  </div>
+                </div>
+            </div>
         </CardsContainer>
         <CardsContainer height="260px" className="meeting-actions">
             <Card width="260px" className="new" onClickHandler={() => {createMeeting(false)}}>
