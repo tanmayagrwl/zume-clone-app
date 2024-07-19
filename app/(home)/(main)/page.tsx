@@ -102,7 +102,7 @@ export default function HomePage () {
                 <Image alt="schedule-meeting" src="/schedule-meeting.svg" height="56" width="56"/>
                 <div><span className="action-header">Schedule Meeting</span> <br/> <span className="action-desc"> Plan your meeting </span></div>
             </Card>
-            <Card width="260px" className="view-recordings">
+            <Card width="260px" className="view-recordings" onClickHandler={(e) => {router.push("/recordings")}}>
             <Image alt="view-recordings" src="/view-recordings.svg" height="56" width="56"/>
             <div><span className="action-header">View Recordings</span> <br/> <span className="action-desc"> Meeting recordings </span></div>
             </Card>
