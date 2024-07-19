@@ -30,7 +30,7 @@ export default function HomePage () {
     const [dateTime, setDateTime] = useState("")
     const [desc, setDesc] = useState("")
     const [showSchedule, setShowSchedule] = useState(false)
-    const { upcomingCalls } = useGetCalls(showSchedule)
+    const { upcomingCalls, todayCalls } = useGetCalls()
 
 
     
@@ -64,12 +64,18 @@ export default function HomePage () {
         return <Loader/>
     }
 
-    console.log(upcomingCalls)
+    console.log("today", todayCalls)
 
     return (<div className="home-outer">
         <CardsContainer height="303px">
             <Card backgroundImage="home-background.png" className="upcoming-container">
+              
             </Card>
+            <div className="upcoming-container-superimpose">
+                {todayCalls?.length>0 && <SignedIn>
+                  Upcoming Meeting at {todayCalls?.[0].state.startsAt?.getTime()}
+                </SignedIn>}
+              </div>
         </CardsContainer>
         <CardsContainer height="260px" className="meeting-actions">
             <Card width="260px" className="new" onClickHandler={() => {createMeeting(false)}}>
@@ -94,7 +100,7 @@ export default function HomePage () {
                 <h2 className="text-[30px] font-semibold">Today’s Upcoming Meetings</h2>
                 <span><Link href="/upcoming"> See all </Link></span>
             </div>
-            <CallList type="upcoming" />        
+            <CallList type='today' />        
         </SignedIn>
         <MeetingModal isOpen={showSchedule} title="Schedule Meeting" buttonText="Schedule Meeting" handleClick={() => {createMeeting();setShowSchedule(false);}} onClose={(e) => {setShowSchedule(false)}}>
           <div>

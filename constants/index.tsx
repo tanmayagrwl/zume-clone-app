@@ -26,11 +26,6 @@ export const sideBarItems: Item[] = [
         link: "/recordings",
         image: "/recordings.svg"
     },
-    {
-        name: "Personal Room",
-        link: "/personal-room",
-        image: "/personal-room.svg"
-    }
 ] 
 
 export const avatarImages = [

@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
-  const { endedCalls, upcomingCalls, callRecordings, isLoading } =
+  const { endedCalls, upcomingCalls, callRecordings, isLoading, todayCalls } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 
@@ -22,6 +22,8 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         return recordings;
       case 'upcoming':
         return upcomingCalls;
+      case 'today':
+        return todayCalls;
       default:
         return [];
     }

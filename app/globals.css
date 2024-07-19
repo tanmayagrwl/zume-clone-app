@@ -241,6 +241,13 @@ html, body {
   gap: 30px;
 }
 
+.upcoming-container-superimpose {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-height: 303px;
+}
+
 
 /* ==== stream class override ===== */
 
