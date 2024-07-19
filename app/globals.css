@@ -95,7 +95,6 @@ html, body {
 
 .home-container {
   display: flex;
-  height: 100%;
 }
 
 .sidebar-container{
@@ -229,6 +228,17 @@ html, body {
 .previous-container, .upcoming-container, .recording-container
 {
   padding: 40px;
+}
+
+.upcoming-meetings-container{
+  gap: 20px;
+}
+
+.upcoming-meetings-container .upcoming-meetings-card{
+  padding: 32px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 

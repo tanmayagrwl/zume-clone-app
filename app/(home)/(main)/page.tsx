@@ -19,6 +19,7 @@ import Loader from "@/components/Loader";
 import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingModal from "@/components/MeetingModal";
 import ReactDatePicker from 'react-datepicker';
+import CallList from "@/components/CallList";
 
 export default function HomePage () {
 
@@ -39,7 +40,7 @@ export default function HomePage () {
           const id = crypto.randomUUID();
           const call = client.call('default', id);
           if (!call) throw new Error('Failed to create meeting');
-          
+
           const startsAt = dateTime ? dateTime?.toISOString() : new Date(Date.now()).toISOString();
           const description = desc || 'Instant Meeting';
           await call.getOrCreate({
@@ -90,17 +91,10 @@ export default function HomePage () {
         </CardsContainer>
         <SignedIn>
             <div className="overview">
-                <h2>Today’s Upcoming Meetings</h2>
+                <h2 className="text-[30px] font-semibold">Today’s Upcoming Meetings</h2>
                 <span><Link href="/upcoming"> See all </Link></span>
             </div>
-            {upcomingCalls?.length>0 && <CardsContainer height="260px" className="upcoming-meetings-container">
-              {upcomingCalls?.slice(0, 2).map(callData => (<Card width="260px" className="upcoming-meetings-card">
-                <Image alt="view-recordings" src="/upcoming.svg" height="30" width="30"/>
-                <div>
-                  <div></div>
-                </div>
-              </Card>))}
-            </CardsContainer>}               
+            <CallList type="upcoming" />        
         </SignedIn>
         <MeetingModal isOpen={showSchedule} title="Schedule Meeting" buttonText="Schedule Meeting" handleClick={() => {createMeeting();setShowSchedule(false);}} onClose={(e) => {setShowSchedule(false)}}>
           <div>
