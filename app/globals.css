@@ -258,6 +258,9 @@ html, body {
   border-radius: 8px;
 }
 
+.meeting-actions .card{
+  cursor: pointer;
+}
 
 /* ==== stream class override ===== */
 

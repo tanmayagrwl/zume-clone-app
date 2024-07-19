@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
 import { useGetCalls } from '@/hooks/useGetCalls';
@@ -31,6 +31,10 @@ export default function HomePage () {
     const [dateTime, setDateTime] = useState("")
     const [desc, setDesc] = useState("")
     const [showSchedule, setShowSchedule] = useState(false)
+    
+    const [showJoin, setShowJoin] = useState(false)
+    const idRef = useRef(null)
+
     const { upcomingCalls, todayCalls } = useGetCalls()
 
 
@@ -90,7 +94,7 @@ export default function HomePage () {
                 <Image alt="new-meeting" src="/new-meeting.svg" height="56" width="56"/>
                 <div><span className="action-header">New Meeting</span> <br/> <span className="action-desc"> Setup a new recording </span></div>
             </Card>
-            <Card width="260px" className="join">
+            <Card width="260px" className="join" onClickHandler={() => {setShowJoin(true)}}>
                 <Image alt="join-meeting" src="/join-meeting.svg" height="56" width="56"/>
                 <div><span className="action-header">Join Meeting</span> <br/> <span className="action-desc"> via invitation link </span></div>
             </Card>
@@ -129,6 +133,12 @@ export default function HomePage () {
               className="w-full rounded bg-dark-3 p-2 bg-[#252A41] focus:outline-none"
             />
             </div>
+          </div>
+        </MeetingModal>
+        <MeetingModal isOpen={showJoin} title="Join Meeting" buttonText="Join" handleClick={() => {router.push(idRef.current.value)}} onClose={(e) => {setShowJoin(false)}}>
+          <div>
+            <div className="mb-2"> Enter Meeting ID </div>
+            <input ref={idRef} className="w-full bg-[#252A41]" name="meeting-id"></input>
           </div>
         </MeetingModal>
     </div>)

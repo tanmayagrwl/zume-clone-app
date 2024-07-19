@@ -13,31 +13,31 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
   const [videoClient, setVideoClient] = useState<StreamVideoClient>();
   const { user, isLoaded } = useUser();
 
+
   useEffect(() => {
     if (!isLoaded) return;
+
     if (!API_KEY) throw new Error('Stream API key is missing');
-    let client
-    if(user) {
-      client = new StreamVideoClient({
+
+    let random_user_id
+    if (!user)
+    { const guestUserId = localStorage.getItem("guest_user_id")
+      if(guestUserId) random_user_id = guestUserId
+      else {
+        random_user_id = crypto.randomUUID()
+        localStorage.setItem("guest_user_id", random_user_id)
+      }
+    }
+    const client = new StreamVideoClient({
         apiKey: API_KEY,
         user: {
-          id: user?.id,
-          name: user?.username || user?.id,
-          image: user?.imageUrl,
+          id: user?.id ?? random_user_id,
+          name: user?.username || user?.id || random_user_id,
+          image: user?.imageUrl || "",
         },
-        tokenProvider
+        tokenProvider: tokenProvider.bind(this, random_user_id)
       });
-    } 
-    else{
-    let random_user_id = crypto.randomUUID()
-    client = new StreamVideoClient({
-      apiKey: API_KEY,
-      user: {
-        id: "guest",
-        type: "guest"
-      }
-    });
-  }
+
     setVideoClient(client);
   }, [user, isLoaded]);
 

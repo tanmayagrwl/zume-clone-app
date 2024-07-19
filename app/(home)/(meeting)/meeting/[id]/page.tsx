@@ -11,6 +11,8 @@ import Alert from '@/components/Alert';
 import MeetingSetup from '@/components/MeetingSetup';
 import MeetingRoom from '@/components/MeetingRoom';
 
+import { notFound } from 'next/navigation';
+
 const MeetingPage = () => {
   const { id } = useParams();
   const { isLoaded, user } = useUser();
@@ -20,9 +22,7 @@ const MeetingPage = () => {
   if (!isLoaded || isCallLoading) return <Loader />;
 
   if (!call) return (
-    <p className="text-center text-3xl font-bold text-white">
-      Call Not Found
-    </p>
+    notFound()
   );
 
   // get more info about custom call type:  https://getstream.io/video/docs/react/guides/configuring-call-types/
