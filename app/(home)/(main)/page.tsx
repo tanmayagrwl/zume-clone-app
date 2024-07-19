@@ -76,11 +76,11 @@ export default function HomePage () {
                 </SignedIn>}</div>
                 <div>
                   <div>
-                    <span className="text-[72px] font-bold">{Moment(todayCalls?.[0].state.startsAt).format("hh:mm")}</span>
-                    <span className="text-[24px] ml-1">{Moment(todayCalls?.[0].state.startsAt).format("a").toUpperCase()}</span>
+                    <span className="text-[72px] font-bold">{Moment(new Date()).format("hh:mm")}</span>
+                    <span className="text-[24px] ml-1">{Moment(new Date()).format("a").toUpperCase()}</span>
                   </div>
                   <div>
-                    <span className="text-[24px]">{Moment(todayCalls?.[0].state.startsAt).format("dddd, D MMM YYYY")}</span>
+                    <span className="text-[24px]">{Moment(new Date()).format("dddd, D MMM YYYY")}</span>
                   </div>
                 </div>
             </div>
