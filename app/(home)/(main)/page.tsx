@@ -109,8 +109,10 @@ export default function HomePage () {
         </CardsContainer>
         <SignedIn>
             <div className="overview">
+              { todayCalls?.length > 0 ? <>
                 <h2 className="text-[30px] font-semibold">Today’s Upcoming Meetings</h2>
                 <span><Link href="/upcoming"> See all </Link></span>
+                </> : <h2 className="text-[30px] font-semibold">You're all caught up for today</h2> }
             </div>
             <CallList type='today' />        
         </SignedIn>
