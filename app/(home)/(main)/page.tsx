@@ -28,7 +28,7 @@ export default function HomePage () {
     const { user } = useUser();
     const [callDetail, setCallDetail] = useState(null)
     const router = useRouter()
-    const [dateTime, setDateTime] = useState("")
+    const [dateTime, setDateTime] = useState<Date>()
     const [desc, setDesc] = useState("")
     const [showSchedule, setShowSchedule] = useState(false)
     
@@ -112,7 +112,7 @@ export default function HomePage () {
               { todayCalls?.length > 0 ? <>
                 <h2 className="text-[30px] font-semibold">Today’s Upcoming Meetings</h2>
                 <span><Link href="/upcoming"> See all </Link></span>
-                </> : <h2 className="text-[30px] font-semibold">You're all caught up for today</h2> }
+                </> : <h2 className="text-[30px] font-semibold">{`You're all caught up for today`}</h2> }
             </div>
             <CallList type='today' toggleVal={showSchedule} />        
         </SignedIn>

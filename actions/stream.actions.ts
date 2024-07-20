@@ -6,7 +6,7 @@ import { StreamClient } from '@stream-io/node-sdk';
 const STREAM_API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 const STREAM_API_SECRET = process.env.STREAM_SECRET_KEY;
 
-export const tokenProvider = async (random_user_id) => {
+export const tokenProvider = async (random_user_id:string) => {
   const user = await currentUser();
 
   if (!STREAM_API_KEY) throw new Error('Stream API key secret is missing');
