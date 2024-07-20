@@ -26,8 +26,8 @@ const EndCallButton = () => {
   if (!isMeetingOwner) return null;
 
   const endCall = async () => {
-    call.camera.disable();
-    call.microphone.disable();
+    await call.camera.disable();
+    await call.microphone.disable();
     await call.endCall();
     router.push('/');
   };

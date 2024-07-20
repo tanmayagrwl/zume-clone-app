@@ -35,7 +35,7 @@ export default function HomePage () {
     const [showJoin, setShowJoin] = useState(false)
     const idRef = useRef(null)
 
-    const { upcomingCalls, todayCalls } = useGetCalls()
+    const { todayCalls } = useGetCalls()
 
 
     
@@ -114,7 +114,7 @@ export default function HomePage () {
                 <span><Link href="/upcoming"> See all </Link></span>
                 </> : <h2 className="text-[30px] font-semibold">You're all caught up for today</h2> }
             </div>
-            <CallList type='today' />        
+            <CallList type='today' toggleVal={showSchedule} />        
         </SignedIn>
         <MeetingModal isOpen={showSchedule} title="Schedule Meeting" buttonText="Schedule Meeting" handleClick={() => {createMeeting();setShowSchedule(false);}} onClose={(e) => {setShowSchedule(false)}}>
           <div>

@@ -8,9 +8,9 @@ import MeetingCard from './MeetingCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
+const CallList = ({ type, toggleVal }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   const router = useRouter();
-  const { endedCalls, upcomingCalls, callRecordings, isLoading, todayCalls } =
+  const { endedCalls, upcomingCalls, callRecordings, isLoading, todayCalls, loadCalls } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 
@@ -41,6 +41,13 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         return '';
     }
   };
+
+  useEffect(() => {
+    if(!toggleVal)
+    setTimeout(() => {
+      loadCalls();
+    }, 2000)
+  }, [toggleVal])
 
   useEffect(() => {
     const fetchRecordings = async () => {
