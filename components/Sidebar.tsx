@@ -13,7 +13,7 @@ function Sidebar() {
     <div className="sidebar-container">
         <div className="header">
         <Image src="/logo.svg" width={40} height={40} alt="sidebar logo"/>  
-        <p>ZOOM</p>
+        <p>ZUME</p>
         </div> 
         <div className="items">
             {sideBarItems.map((item, index) => {
