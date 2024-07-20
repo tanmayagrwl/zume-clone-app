@@ -5,7 +5,7 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk';
 import Loader from './Loader';
 import { useGetCalls } from '@/hooks/useGetCalls';
 import MeetingCard from './MeetingCard';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const CallList = ({ type, toggleVal }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
@@ -14,6 +14,8 @@ const CallList = ({ type, toggleVal }: { type: 'ended' | 'upcoming' | 'recording
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
 
+  const initialRender = useRef(true)
+  
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -42,12 +44,17 @@ const CallList = ({ type, toggleVal }: { type: 'ended' | 'upcoming' | 'recording
     }
   };
 
+
   useEffect(() => {
-    if(!toggleVal)
+    if(!toggleVal && !initialRender.current)
     setTimeout(() => {
       loadCalls();
     }, 2000)
   }, [toggleVal])
+
+  useEffect(() => {
+    initialRender.current = false
+  }, [])
 
   useEffect(() => {
     const fetchRecordings = async () => {
@@ -100,7 +107,7 @@ const CallList = ({ type, toggleVal }: { type: 'ended' | 'upcoming' | 'recording
                 ? (meeting as CallRecording).url
                 : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${(meeting as Call).id}`
             }
-            buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
+            buttonIcon1={type === 'recordings' ? '/play.svg' : undefined}
             buttonText={type === 'recordings' ? 'Play' : 'Start'}
             handleClick={
               type === 'recordings'
