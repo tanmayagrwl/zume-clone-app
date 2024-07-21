@@ -26,7 +26,8 @@ export default function HomePage () {
 
     const client = useStreamVideoClient();
     const { user } = useUser();
-    const [callDetail, setCallDetail] = useState(null)
+
+    const [callDetail, setCallDetail] = useState<Call | null>(null)
     const router = useRouter()
     const [dateTime, setDateTime] = useState<Date>()
     const [desc, setDesc] = useState("")
@@ -98,7 +99,7 @@ export default function HomePage () {
                 <Image alt="join-meeting" src="/join-meeting.svg" height="56" width="56"/>
                 <div><span className="action-header">Join Meeting</span> <br/> <span className="action-desc"> via invitation link </span></div>
             </Card>
-            <Card width="260px" className="schedule" onClickHandler={(e) => {setShowSchedule(true)}}>
+            <Card width="260px"  className="schedule w-28" onClickHandler={(e) => {setShowSchedule(true)}}>
                 <Image alt="schedule-meeting" src="/schedule-meeting.svg" height="56" width="56"/>
                 <div><span className="action-header">Schedule Meeting</span> <br/> <span className="action-desc"> Plan your meeting </span></div>
             </Card>
@@ -116,7 +117,7 @@ export default function HomePage () {
             </div>
             <CallList type='today' toggleVal={showSchedule} />        
         </SignedIn>
-        <MeetingModal isOpen={showSchedule} title="Schedule Meeting" buttonText="Schedule Meeting" handleClick={() => {createMeeting();setShowSchedule(false);}} onClose={(e) => {setShowSchedule(false)}}>
+        <MeetingModal isOpen={showSchedule} title="Schedule Meeting" buttonText="Schedule Meeting" handleClick={() => {createMeeting();setShowSchedule(false);}} onClose={() => {setShowSchedule(false)}}>
           <div>
             <div className="mb-2"> Add a description </div>
             <textarea value={desc} onChange={(e) => setDesc(e.target.value)} className="w-full bg-[#252A41]"></textarea>
@@ -137,7 +138,7 @@ export default function HomePage () {
             </div>
           </div>
         </MeetingModal>
-        <MeetingModal isOpen={showJoin} title="Join Meeting" buttonText="Join" handleClick={() => {router.push(idRef.current.value)}} onClose={(e) => {setShowJoin(false)}}>
+        <MeetingModal isOpen={showJoin} title="Join Meeting" buttonText="Join" handleClick={() => {router.push(idRef?.current?.value)}} onClose={(e) => {setShowJoin(false)}}>
           <div>
             <div className="mb-2"> Enter Meeting ID </div>
             <input ref={idRef} className="w-full bg-[#252A41]" name="meeting-id"></input>
